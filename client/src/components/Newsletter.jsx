@@ -2,23 +2,29 @@ import { Send } from "@mui/icons-material";
 
 const Newsletter = () => {
   return (
-    <div className="h-[60vh] bg-[#fcf5f5] flex items-center justify-center flex-col">
-      <h1 className="text-6xl font-semibold mb-5">Newsletter</h1>
-      <div className="text-2xl font-light mb-5">
-        Get timely updates from your favourite products.
-      </div>
-      <div className="w-1/2 h-[40px] bg-white flex justify-between items-center border border-gray-600 border-solid">
-        <input
-          placeholder=" Your e-mail"
-          className="border-none h-[38px] w-[812px] pl-4"
-        />
-        <div className="w-[32px] h-[32px] hover:bg-teal-200 rounded-full flex items-center justify-center ">
-          <button className="ml-[2px]">
-            <Send />
+    <section className="bg-[#f1eded] py-16 px-4">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-semibold mb-4">Newsletter</h2>
+        <p className="text-xl md:text-2xl font-light mb-8">
+          Get timely updates from your favorite products.
+        </p>
+        <form className="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+          <input
+            type="email"
+            placeholder="Your email"
+            className="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+            required
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center justify-center px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-colors"
+          >
+            <Send className="mr-2" />
+            Subscribe
           </button>
-        </div>
+        </form>
       </div>
-    </div>
+    </section>
   );
 };
 

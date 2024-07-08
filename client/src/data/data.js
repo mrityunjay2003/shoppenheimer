@@ -36,7 +36,7 @@ export const categories = [
   {
     id: 3,
     img: "/ecoom/cat3.jpg",
-    title: "LIGHT JACKETS",
+    title: "women",
   },
 ];
 

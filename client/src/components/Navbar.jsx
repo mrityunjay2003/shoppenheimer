@@ -1,59 +1,57 @@
-import { Search, Sell } from "@mui/icons-material";
+import { Menu, Search, ShoppingCartOutlined } from "@mui/icons-material";
 import Badge from "@mui/material/Badge";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="h-[60px]">
-      <div className="py-2.5 px-5 flex items-center justify-between">
-        <div className="w-1/3 flex items-center">
-          <span className="text-sm font-bold cursor-pointer ml-3">EN</span>
-          {/* <div className="border border-gray-600 flex items-center ml-6 p-1 rounded-sm">
-            <input className="border-0"></input>
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </div> */}
-          <div className="max-w-md mx-auto">
-            <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-              <div className="grid place-items-center h-full w-12 text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+    <nav className="bg-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <Link to="/" className="font-bold text-2xl text-indigo-600">LAMA.</Link>
+            </div>
+            <div className="hidden md:block ml-10">
+              <div className="flex items-baseline space-x-4">
+                <Link to="/" className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+                <Link to="/products" className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Products</Link>
+                <Link to="/about" className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">About</Link>
+                <Link to="/contact" className="text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Contact</Link>
               </div>
-
-              <input
-                className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
-                type="text"
-                id="search"
-                placeholder="Shop for.."
-              />
             </div>
           </div>
-        </div>
-
-        <div className="w-1/3 text-center">
-          <h1 className="font-urban font-bold text-2xl">Shoppenheimer</h1>
-        </div>
-
-        <div className="w-1/3 flex items-center justify-end">
-          <p className="font-sm font-urban ml-6">REGISTER</p>
-          <p className="font-sm font-urban ml-6 mr-6">SIGN IN</p>
-          <Badge badgeContent={4} color="primary">
-            <Sell />
-          </Badge>
+          <div className="hidden md:block">
+            <div className="ml-4 flex items-center md:ml-6">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Search"
+                  type="search"
+                />
+              </div>
+              <Link to="/login" className="ml-4 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Sign In
+              </Link>
+              <Link to="/register" className="ml-2 px-4 py-2 text-sm font-medium text-indigo-600 bg-white border border-indigo-600 rounded-md hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Register
+              </Link>
+              <Link to="/cart" className="ml-4">
+                <Badge badgeContent={4} color="primary">
+                  <ShoppingCartOutlined className="h-6 w-6 text-gray-600" />
+                </Badge>
+              </Link>
+            </div>
+          </div>
+          <div className="md:hidden">
+            <Menu className="h-6 w-6 text-gray-600" />
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
