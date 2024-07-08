@@ -1,15 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { userRequest } from "../requestMethods";
 
 const Cart = () => {
-    const cart = useSelector((state) => state.cart);
-    const history = useHistory();
+    // const cart = useSelector((state) => state.cart);
+    // const history = useHistory();
     return (
         <div>
             <Navbar />
