@@ -1,9 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { userRequest } from "../requestMethods";
 
 const Cart = () => {
+    const cart = useSelector((state) => state.cart);
+    const history = useHistory();
     return (
         <div>
             <Navbar />
@@ -11,12 +17,20 @@ const Cart = () => {
             <div className="p-5 md:p-10">
                 <h1 className="font-light text-center">YOUR BAG</h1>
                 <div className="flex items-center justify-between p-5">
-                    <button className="p-3 font-semibold cursor-pointer bg-transparent">CONTINUE SHOPPING</button>
+                    <button className="p-3 font-semibold cursor-pointer bg-transparent">
+                        CONTINUE SHOPPING
+                    </button>
                     <div className="hidden md:block">
-                        <span className="underline cursor-pointer mx-2">Shopping Bag(2)</span>
-                        <span className="underline cursor-pointer mx-2">Your Wishlist (0)</span>
+                        <span className="underline cursor-pointer mx-2">
+                            Shopping Bag(2)
+                        </span>
+                        <span className="underline cursor-pointer mx-2">
+                            Your Wishlist (0)
+                        </span>
                     </div>
-                    <button className="p-3 font-semibold cursor-pointer border-none bg-black text-white">CHECKOUT NOW</button>
+                    <button className="p-3 font-semibold cursor-pointer border-none bg-black text-white">
+                        CHECKOUT NOW
+                    </button>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between">
                     <div className="flex-[3]">
@@ -98,7 +112,9 @@ const Cart = () => {
                             <span>Total</span>
                             <span>$ 80</span>
                         </div>
-                        <button className="w-full p-3 bg-black text-white font-semibold">CHECKOUT NOW</button>
+                        <button className="w-full p-3 bg-black text-white font-semibold">
+                            CHECKOUT NOW
+                        </button>
                     </div>
                 </div>
             </div>
