@@ -29,6 +29,10 @@ const Product = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
@@ -101,14 +105,14 @@ const Product = () => {
               <span className="font-bold text-gray-700 mr-4">Quantity:</span>
               <div className="flex items-center border border-gray-300 rounded-md">
                 <button
-                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 focus:outline-none"
+                  className="px-2 py-1"
                   onClick={() => handleQuantity("dec")}
                 >
                   <Remove />
                 </button>
-                <span className="px-4 py-2 text-center">{quantity}</span>
+                <span className="px-4 py-1 border-x">{quantity}</span>
                 <button
-                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 focus:outline-none"
+                  className="px-2 py-1"
                   onClick={() => handleQuantity("inc")}
                 >
                   <Add />

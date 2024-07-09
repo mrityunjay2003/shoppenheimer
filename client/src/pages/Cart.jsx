@@ -1,120 +1,138 @@
-import { Add, Remove } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { Add, Favorite, Remove, ShoppingCart } from "@mui/icons-material";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-// import { useHistory } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { userRequest } from "../requestMethods";
 
-const Cart = () => {
-    // const cart = useSelector((state) => state.cart);
-    // const history = useHistory();
+const CartItem = ({ product }) => {
+    const [quantity, setQuantity] = useState(product.quantity)
+    const handleQuantity = (type) => {
+        if (type === "dec") {
+            quantity > 1 && setQuantity(quantity - 1);
+        } else {
+            setQuantity(quantity + 1);
+        }
+    };
     return (
-        <div>
-            <Navbar />
-            <Announcement />
-            <div className="p-5 md:p-10">
-                <h1 className="font-light text-center">YOUR BAG</h1>
-                <div className="flex items-center justify-between p-5">
-                    <button className="p-3 font-semibold cursor-pointer bg-transparent">
-                        CONTINUE SHOPPING
-                    </button>
-                    <div className="hidden md:block">
-                        <span className="underline cursor-pointer mx-2">
-                            Shopping Bag(2)
-                        </span>
-                        <span className="underline cursor-pointer mx-2">
-                            Your Wishlist (0)
-                        </span>
+        <div className="flex flex-col md:flex-row justify-between mb-5 border-b pb-5">
+            <div className="flex-[2] flex">
+                <Link to={`/product/${product._id}`}>
+                    <img
+                        className="w-[100px] h-[100px] object-cover mr-4"
+                        src={product.img}
+                        alt={product.name}
+                    />
+                </Link>
+                <div className="flex flex-col justify-between">
+                    <span className="font-semibold">{product.title}</span>
+                    <span className="text-gray-500">ID: {product._id}</span>
+                    <div className="flex items-center">
+                        <div
+                            className="w-5 h-5 rounded-full mr-2"
+                            style={{ backgroundColor: product.color }}
+                        ></div>
+                        <span className="text-gray-500">Size: {product.size}</span>
                     </div>
-                    <button className="p-3 font-semibold cursor-pointer border-none bg-black text-white">
-                        CHECKOUT NOW
+                </div>
+            </div>
+            <div className="flex items-center justify-between mt-4 md:mt-0">
+                <div className="flex items-center border rounded-md">
+                    <button className="px-2 py-1" onClick={() => handleQuantity("dec")}>
+                        <Remove />
+                    </button>
+                    <span className="px-4 py-1 border-x">{quantity}</span>
+                    <button className="px-2 py-1" onClick={() => handleQuantity("inc")}>
+                        {" "}
+                        <Add />
                     </button>
                 </div>
-                <div className="flex flex-col md:flex-row justify-between">
-                    <div className="flex-[3]">
-                        <div className="flex flex-col md:flex-row justify-between mb-5">
-                            <div className="flex-[2] flex">
-                                <img
-                                    className="w-[200px]"
-                                    src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A"
-                                    alt="Product"
-                                />
-                                <div className="p-5 flex flex-col justify-around">
-                                    <span>
-                                        <b>Product:</b> JESSIE THUNDER SHOES
-                                    </span>
-                                    <span>
-                                        <b>ID:</b> 93813718293
-                                    </span>
-                                    <div className="w-5 h-5 rounded-full bg-black"></div>
-                                    <span>
-                                        <b>Size:</b> 37.5
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="flex-[1] flex flex-col items-center justify-center">
-                                <div className="flex items-center mb-5">
-                                    <Add />
-                                    <span className="text-2xl mx-2">2</span>
-                                    <Remove />
-                                </div>
-                                <div className="text-2xl font-light">$ 30</div>
-                            </div>
-                        </div>
-                        <hr className="bg-[#eee] border-none h-[1px]" />
-                        <div className="flex flex-col md:flex-row justify-between mb-5">
-                            <div className="flex-[2] flex">
-                                <img
-                                    className="w-[200px]"
-                                    src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png"
-                                    alt="Product"
-                                />
-                                <div className="p-5 flex flex-col justify-around">
-                                    <span>
-                                        <b>Product:</b> HAKURA T-SHIRT
-                                    </span>
-                                    <span>
-                                        <b>ID:</b> 93813718293
-                                    </span>
-                                    <div className="w-5 h-5 rounded-full bg-gray-400"></div>
-                                    <span>
-                                        <b>Size:</b> M
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="flex-[1] flex flex-col items-center justify-center">
-                                <div className="flex items-center mb-5">
-                                    <Add />
-                                    <span className="text-2xl mx-2">1</span>
-                                    <Remove />
-                                </div>
-                                <div className="text-2xl font-light">$ 20</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex-[1] border-[0.5px] border-gray-300 rounded-lg p-5 h-[50vh]">
-                        <h1 className="font-light">ORDER SUMMARY</h1>
-                        <div className="my-8 flex justify-between">
-                            <span>Subtotal</span>
-                            <span>$ 80</span>
-                        </div>
-                        <div className="my-8 flex justify-between">
-                            <span>Estimated Shipping</span>
-                            <span>$ 5.90</span>
-                        </div>
-                        <div className="my-8 flex justify-between">
-                            <span>Shipping Discount</span>
-                            <span>$ -5.90</span>
-                        </div>
-                        <div className="my-8 flex justify-between font-semibold text-xl">
-                            <span>Total</span>
-                            <span>$ 80</span>
-                        </div>
-                        <button className="w-full p-3 bg-black text-white font-semibold">
-                            CHECKOUT NOW
+                <div className="text-xl font-semibold ml-4">
+                    ${(product.price * product.quantity).toFixed(2)}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Cart = () => {
+    const cart = useSelector((state) => state.cart);
+    const navigate = useNavigate();
+
+    const calculateTotal = () => {
+        return cart.products.reduce(
+            (total, product) => total + product.price * product.quantity,
+            0
+        );
+    };
+
+    return (
+        <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <Announcement />
+            <div className="flex-grow container mx-auto px-4 py-8">
+                <h1 className="text-3xl font-semibold text-center mb-8">
+                    Your Shopping Cart
+                </h1>
+                <div className="flex justify-between items-center mb-8">
+                    <button
+                        onClick={() => navigate("/products")}
+                        className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white transition"
+                    >
+                        Continue Shopping
+                    </button>
+                    <div className="hidden md:flex space-x-4">
+                        <button className="flex items-center">
+                            <ShoppingCart className="mr-2" />
+                            Shopping Bag ({cart.products.length})
                         </button>
+                        <button className="flex items-center">
+                            <Favorite className="mr-2" />
+                            Your Wishlist (0)
+                        </button>
+                    </div>
+                    <button
+                        onClick={() => navigate("/checkout")}
+                        className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+                    >
+                        Checkout Now
+                    </button>
+                </div>
+                <div className="flex flex-col lg:flex-row gap-8">
+                    <div className="flex-[2]">
+                        {cart.products.map((product) => (
+                            <CartItem key={product._id} product={product} />
+                        ))}
+                    </div>
+                    <div className="flex-1">
+                        <div className="bg-gray-100 rounded-lg p-6">
+                            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+                            <div className="space-y-4">
+                                <div className="flex justify-between">
+                                    <span>Subtotal</span>
+                                    <span>${calculateTotal().toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span>Estimated Shipping</span>
+                                    <span>$5.90</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span>Shipping Discount</span>
+                                    <span className="text-green-500">-$5.90</span>
+                                </div>
+                                <div className="flex justify-between text-xl font-semibold">
+                                    <span>Total</span>
+                                    <span>${calculateTotal().toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => navigate("/checkout")}
+                                className="w-full bg-black text-white py-3 rounded mt-6 hover:bg-gray-800 transition"
+                            >
+                                Checkout Now
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
