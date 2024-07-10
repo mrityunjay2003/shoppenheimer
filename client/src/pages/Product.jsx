@@ -91,7 +91,7 @@ const Product = () => {
             <div className="mb-4">
               <span className="font-bold text-gray-700">Size:</span>
               <select
-                className="block w-full mt-2 bg-white border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="block max-w-md mt-2 bg-white border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={size}
                 onChange={(e) => setSize(e.target.value)}
               >
