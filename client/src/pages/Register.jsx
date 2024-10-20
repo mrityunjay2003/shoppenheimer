@@ -6,7 +6,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const baseUrl = "https://shoppenheimer-api.onrender.com";
+  const baseUrl = "https://shoppenheimer-api.onrender.com/";
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
