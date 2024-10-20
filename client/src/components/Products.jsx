@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Product from "./Product";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = "https://shoppenheimer-api.onrender.com";
 
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]);
